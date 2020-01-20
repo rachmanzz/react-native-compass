@@ -5,13 +5,33 @@ import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.Callback;
 
-public class CompassModule extends ReactContextBaseJavaModule {
+import android.content.Context;
+import android.hardware.Sensor;
+
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+
+public class CompassModule extends ReactContextBaseJavaModule implements SensorEventListener {
 
     private final ReactApplicationContext reactContext;
+    private static SensorManager sensorService;
+    private Sensor sensor;
+
+    private float degree = 0;
 
     public CompassModule(ReactApplicationContext reactContext) {
         super(reactContext);
         this.reactContext = reactContext;
+
+        sensorService = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+
+        sensor = sensorService.getDefaultSensor(Sensor.TYPE_ORIENTATION);
+
+        if (sensor != null) {
+            sensorService.registerListener(this, sensor, SensorManager.SENSOR_DELAY_NORMAL);
+
+        }
+
     }
 
     @Override
@@ -23,5 +43,20 @@ public class CompassModule extends ReactContextBaseJavaModule {
     public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
         // TODO: Implement some actually useful functionality
         callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    }
+
+    @ReactMethod
+    public void unregListener() {
+        sensorService.unregisterListener(this);
+    }
+
+    @Override
+    public void onSensorChanged(SensorEvent event) {
+        this.degree = event.values[0];
+    }
+
+    @Override
+    public void onAccuracyChanged(android.hardware.Sensor sensor, int accuracy) {
+
     }
 }
