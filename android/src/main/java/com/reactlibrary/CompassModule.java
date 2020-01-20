@@ -39,11 +39,18 @@ public class CompassModule extends ReactContextBaseJavaModule implements SensorE
         return "Compass";
     }
 
+    // @ReactMethod
+    // public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
+    //     // TODO: Implement some actually useful functionality
+    //     callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    // }
+
     @ReactMethod
-    public void sampleMethod(String stringArgument, int numberArgument, Callback callback) {
-        // TODO: Implement some actually useful functionality
-        callback.invoke("Received numberArgument: " + numberArgument + " stringArgument: " + stringArgument);
+    public void getCompass(Callback callback) {
+        callback.invoke(degree + "")
     }
+
+
 
     @ReactMethod
     public void unregListener() {
