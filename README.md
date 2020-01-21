@@ -13,5 +13,7 @@
 import Compass from 'react-native-compass';
 
 // TODO: What to do with the module?
-Compass;
+Compass.getCompass(function (degree) {
+    // degree is string number
+});
 ```
