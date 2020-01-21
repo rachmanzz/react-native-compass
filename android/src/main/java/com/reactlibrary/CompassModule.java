@@ -10,6 +10,7 @@ import android.hardware.Sensor;
 
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 
 public class CompassModule extends ReactContextBaseJavaModule implements SensorEventListener {
 
@@ -23,7 +24,7 @@ public class CompassModule extends ReactContextBaseJavaModule implements SensorE
         super(reactContext);
         this.reactContext = reactContext;
 
-        sensorService = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
+        sensorService = (SensorManager) getReactApplicationContext().getSystemService(Context.SENSOR_SERVICE);
 
         sensor = sensorService.getDefaultSensor(Sensor.TYPE_ORIENTATION);
 
@@ -47,7 +48,7 @@ public class CompassModule extends ReactContextBaseJavaModule implements SensorE
 
     @ReactMethod
     public void getCompass(Callback callback) {
-        callback.invoke(degree + "")
+        callback.invoke(degree + "");
     }
 
 
