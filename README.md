@@ -2,11 +2,11 @@
 
 ## Getting started
 
-`$ npm install react-native-compass --save`
+`$ npm install react-native-compass-x --save`
 
 ### Mostly automatic installation
 
-`$ react-native link react-native-compass`
+`$ react-native link react-native-compass-x`
 
 ## Usage
 ```javascript
