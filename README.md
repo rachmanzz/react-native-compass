@@ -10,7 +10,7 @@
 
 ## Usage
 ```javascript
-import Compass from 'react-native-compass';
+import Compass from 'react-native-compass-x';
 
 // TODO: What to do with the module?
 Compass.getCompass(function (degree) {
